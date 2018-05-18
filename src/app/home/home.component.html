@@ -33,6 +33,18 @@
     </button>
     <router-outlet></router-outlet>
 
+    <div>
+      <mat-form-field>
+        <input type="text" name="birthday" matInput placeholder="生日"
+        [matDatepicker]="birthdayPicker"
+        (dateChange)="logDateChange($event)"
+        (dateInput)="logDateInput($event)"
+        />
+        <mat-datepicker-toggle [for]="birthdayPicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #birthdayPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
     <button mat-raised-button color="primary"> Hello World! </button>
     <br>
     <i class="material-icons">person</i>

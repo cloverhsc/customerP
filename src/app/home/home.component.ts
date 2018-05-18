@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSidenav, MatDrawerToggleResult } from '@angular/material';
+import { MatSidenav, MatDrawerToggleResult,
+  MatDatepickerInputEvent } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,7 @@ import { MatSidenav, MatDrawerToggleResult } from '@angular/material';
 export class HomeComponent implements OnInit {
 
   public account = '';
+  public birthday = '';
 
   constructor() { }
 
@@ -32,4 +35,13 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     console.log('submit!');
   }
+
+  logDateChange($event: MatDatepickerInputEvent<moment.Moment>) {
+    console.log($event);
+  }
+
+  logDateInput($event: MatDatepickerInputEvent<moment.Moment>) {
+    console.log($event);
+  }
+
 }
