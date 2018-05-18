@@ -26,7 +26,7 @@
   /* grid-column: 1 / 4; */
   position: relative;
   width:45%;
-  height: 50%;
+  height: 70%;
   background-color: #ccc;
 }
 
@@ -40,7 +40,7 @@
 .login-area {
   /* grid-column: 1 / 4; */
   width:45%;
-  height: 50%;
+  height: 70%;
   background-color: #ccc;
 }
 

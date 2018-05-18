@@ -18,8 +18,9 @@
               <input [(ngModel)]="account" type="email" class="email" id="email"
               placeholder="Email" minlength="5" name="email" matInput
               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-              #name="ngModel" required>
-              <mat-error *ngIf="!name.valid ">請輸入Email</mat-error>
+              #name="ngModel" [errorStateMatcher]="earlyErrorStateMatcher"
+              required>
+              <mat-error *ngIf="!name.valid">請輸入Email</mat-error>
             </mat-form-field>
           </div>
 
