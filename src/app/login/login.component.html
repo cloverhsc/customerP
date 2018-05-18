@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="item-1">
+    <mat-icon></mat-icon>
+    <span>企業用戶系統中心</span>
+  </div>
+  <div class="item-2">
+    <div class="system-announcement">
+      <p class="system-announcement-header">系統公告</p>
+      <article></article>
+    </div>
+
+    <div class="login-area">
+      <p>帳號登入</p>
+      <div class="login">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <div>
+            <mat-form-field>
+              <input [(ngModel)]="account" type="email" class="email" id="email"
+              placeholder="Email" minlength="5" name="email" matInput
+              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+              #name="ngModel" required>
+              <mat-error *ngIf="!name.valid ">請輸入Email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input [(ngModel)]="password" type="password" class="password"
+              id="password" name="password" placeholder="Password" #pwd="ngModel"
+              minlength="4" required matInput>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" type="submit"
+          class="sub-button">登入</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="item-3">foot</div>
+</div>

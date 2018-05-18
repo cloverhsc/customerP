@@ -1,0 +1,239 @@
+<mat-toolbar class="demo-app-header" color="primary">
+  <button mat-icon-button (click)="sideNav.toggle()">
+    <mat-icon>{{ sideNav.opened ? 'close' : 'menu' }} </mat-icon>
+  </button>
+  <span>我是Toolbar</span>
+
+  <!-- 在這之後的都會被推到右邊去 -->
+  <span class="toolbar-seprator"></span>
+  <button mat-icon-button>
+    <mat-icon>message</mat-icon>
+  </button>
+
+  <button mat-icon-button>
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container class="demo-app-container">
+  <mat-sidenav #sideNav class="demo-app-sidenav"
+  mode="side" (opened)="opened()"
+  (closed)="closed()" opened="true">
+    我是左邊選單
+    <div>
+      <button mat-raised-button color="accent"
+      (click)="toggleSideNav(sideNav)">
+        切換左邊選單狀態
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <button mat-raised-button (click)="toggleSideNav(sideNav)">
+      切換左邊選單狀態
+    </button>
+    <router-outlet></router-outlet>
+
+    <button mat-raised-button color="primary"> Hello World! </button>
+    <br>
+    <i class="material-icons">person</i>
+    <mat-icon>person</mat-icon>
+
+    <div>
+      這是一般的icon顏色
+      <mat-icon>person</mat-icon>
+    </div>
+
+    <div>
+      這是加上primary顏色的icon
+      <mat-icon color='primary'>thumb_up</mat-icon>
+    </div>
+
+    <div>
+      這是加上accent顏色的icon
+      <mat-icon color="accent">info</mat-icon>
+    </div>
+
+    <div>
+      這是加上warn顏色的icon
+      <mat-icon color="warn">warning</mat-icon>
+    </div>
+
+    <button mat-button>我是按鈕</button>
+    <button mat-button color="primary">Primary</button>
+    <button mat-button color="accent">Accent</button>
+    <button mat-button color="warng">Warn</button>
+    <button mat-button disabled>Disabled</button>
+    <a mat-button>Link</a>
+
+    <button mat-raised-button>我是按鈕</button>
+<button mat-raised-button color="primary">Primary</button>
+<button mat-raised-button color="accent">Accent</button>
+<button mat-raised-button color="warng">Warn</button>
+<button mat-raised-button disabled>Disabled</button>
+<a mat-raised-button>Link</a>
+
+<button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon>我有ICON</button>
+<br >
+<br >
+<br >
+<div>
+<button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon></button>
+</div>
+
+<br >
+<br >
+<button mat-raised-button mat-icon-button color="primary"><mat-icon>thumb_up</mat-icon></button>
+
+<br >
+<br >
+<button mat-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+
+<br >
+<br >
+<button mat-mini-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+
+<br >
+<br >
+<mat-button-toggle>我是個開關</mat-button-toggle>
+
+<div>
+  <mat-button-toggle-group #formatAlignGroup="matButtonToggleGroup">
+    <!-- button toggle 所代表的值 -->
+    <mat-button-toggle value="left">
+      <mat-icon>format_align_left</mat-icon>
+    </mat-button-toggle>
+
+    <!-- 預設被選取 -->
+    <mat-button-toggle value="center" checked="true">
+      <mat-icon>format_align_center</mat-icon>
+    </mat-button-toggle>
+
+    <mat-button-toggle value="right">
+      <mat-icon>format_align_right</mat-icon>
+    </mat-button-toggle>
+
+    <!-- 不允許選擇的button toggle -->
+    <mat-button-toggle value="justify" disabled>
+      <mat-icon>format_align_justify</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <div>對齊方式為： {{formatAlignGroup.value}}</div>
+
+  <!-- 加上multiple 則裡面的mat-button-toggle可以複選 -->
+  <!-- 加上vertical="true" 改變排列方式 -->
+  <mat-button-toggle-group multiple vertical="true">
+    <mat-button-toggle value="bold" #buttonToggleBold>
+      <mat-icon>format_bold</mat-icon>
+    </mat-button-toggle>
+
+    <mat-button-toggle value="italic" checked="true" #buttonToggleItalic>
+      <mat-icon>format_italic</mat-icon>
+    </mat-button-toggle>
+
+    <mat-button-toggle value="underlined" checked="true" #buttonToggleUnderlined>
+      <mat-icon>format_underlined</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div>粗體： {{buttonToggleBold.checked}}、斜體： {{buttonToggleItalic.checked}}、底線： {{buttonToggleUnderlined.checked}}</div>
+</div>
+
+<div class="demo-ripple-container" mat-ripple></div>
+<br >
+<br >
+<button mat-mini-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<br >
+<br >
+<button mat-mini-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<br >
+<br >
+<button mat-mini-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<br >
+<br >
+<button mat-mini-fab>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="primary">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="accent">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab color="warn">
+  <mat-icon>thumb_up</mat-icon>
+</button>
+<button mat-mini-fab disabled>
+  <mat-icon>thumb_up</mat-icon>
+</button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
