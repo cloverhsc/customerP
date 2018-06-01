@@ -1,0 +1,57 @@
+<div *ngIf="isloading">
+  <h2>Loading.....</h2>
+</div>
+
+<div *ngIf="!isloading">
+  <mat-list>
+    <mat-list-item>
+      <img matListAvatar src="assets/angular.jpg" />
+      <p matLine>Clover</p>
+    </mat-list-item>
+  </mat-list>
+
+  <form (ngSubmit)="onSubmit(servicesForm.value.services)" #servicesForm="ngForm">
+    <mat-selection-list [(ngModel)]="option" name="services"
+    #services="ngModel">
+      <mat-list-option  *ngFor="let serv of service_list.list"
+      [value]="serv.name">
+        {{serv.title}}
+      </mat-list-option>
+    </mat-selection-list>
+    <button mat-raised-button color="accent" type="submit">
+      Buy out
+    </button>
+  </form>
+
+  <br>
+  <div class="container">
+
+  <div class="service">
+    <mat-list>
+      <mat-list-item>
+        <img matListAvatar src="assets/angular.jpg" />
+        <p matLine (click)="getClover()">Clover</p>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-expansion-panel expanded="true" *ngIf="newUserFile">
+        <mat-expansion-panel-header>
+          已購買服務
+        </mat-expansion-panel-header>
+
+        <mat-nav-list *ngFor="let serv of newUserFile.serviceList">
+          <mat-list-item  [id]="serv.name" (click)="setService(serv.name)">
+            <mat-icon>settings</mat-icon>
+            {{serv.title}}
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </div>
+
+    <div class="setting">
+    </div>
+
+  </div>
+</div>
+
+

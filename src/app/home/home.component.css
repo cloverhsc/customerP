@@ -1,5 +1,5 @@
 mat-sidenav {
-  width: 400px;
+  width: 200px;
 }
 
 .demo-app-header {
@@ -17,4 +17,10 @@ mat-sidenav {
 
 .toolbar-seprator {
   flex: 1 1 auto;
+}
+
+.mat-list-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
 }

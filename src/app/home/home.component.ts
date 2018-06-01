@@ -3,6 +3,8 @@ import { MatSidenav, MatDrawerToggleResult,
   MatDatepickerInputEvent } from '@angular/material';
 import * as moment from 'moment';
 
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,8 +14,17 @@ export class HomeComponent implements OnInit {
 
   public account = '';
   public birthday = '';
+  public optnew = '0';
+  public optads = '0';
 
-  constructor() { }
+  isLinear: boolean;
+  basicFormGroup: FormGroup;
+
+  constructor() {
+    this.basicFormGroup = new FormGroup({
+      name: new FormControl('', Validators.required)
+    });
+  }
 
   ngOnInit() {
   }
@@ -42,6 +53,16 @@ export class HomeComponent implements OnInit {
 
   logDateInput($event: MatDatepickerInputEvent<moment.Moment>) {
     console.log($event);
+  }
+
+  onSelectChangeNews(opt: HTMLSelectElement) {
+    console.log(opt.selected);
+    opt.selected ? this.optnew = opt.value : this.optnew = '0';
+  }
+
+  onSelectChangeAds(opt: HTMLSelectElement) {
+    console.log(opt.selected);
+    opt.selected ? this.optads = opt.value : this.optads = '0';
   }
 
 }

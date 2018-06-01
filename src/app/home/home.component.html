@@ -4,21 +4,41 @@
   </button>
   <span>我是Toolbar</span>
 
+  <mat-menu #messageMenu="matMenu">
+    <button mat-menu-item>最新訊息</button>
+    <button mat-menu-item>訊息設定</button>
+  </mat-menu>
+
   <!-- 在這之後的都會被推到右邊去 -->
   <span class="toolbar-seprator"></span>
-  <button mat-icon-button>
-    <mat-icon>message</mat-icon>
+  <button mat-icon-button [matMenuTriggerFor]="messageMenu"
+  #menuTrigger="matMenuTrigger">
+      <mat-icon>message</mat-icon>
   </button>
 
   <button mat-icon-button>
     <mat-icon>exit_to_app</mat-icon>
   </button>
+
 </mat-toolbar>
 <mat-sidenav-container class="demo-app-container">
   <mat-sidenav #sideNav class="demo-app-sidenav"
   mode="side" (opened)="opened()"
   (closed)="closed()" opened="true">
-    我是左邊選單
+
+    <mat-nav-list>
+      <h3 matSubheader>示範用頁面</h3>
+      <a [routerLink]="['/', 'dashboard', 'survey']" mat-list-item>問卷調查</a>
+      <a [routerLink]="['/', 'dashboard', 'blog']" mat-list-item>部落格</a>
+      <a [routerLink]="['/', 'dashboard', 'inbox']" mat-list-item>收件夾</a>
+      <mat-divider></mat-divider>
+      <!-- 另外一組選單 -->
+      <h3 matSubheader>其他頁面</h3>
+      <a [routerLink]="['/']" mat-list-item>首頁</a>
+      <a [routerLink]="['/']" mat-list-item>Google</a>
+      <a [routerLink]="['/']" mat-list-item>Facebook</a>
+    </mat-nav-list>
+
     <div>
       <button mat-raised-button color="accent"
       (click)="toggleSideNav(sideNav)">
@@ -28,10 +48,181 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
+    <div>
+      <div>
+        <mat-form-field>
+          <input type="text" name="nickname" matInput placeholder="暱稱" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <textarea name="intro_self" matInput placeholder="自我介紹" required></textarea>
+          <mat-hint>簡單介紹一下你的興趣吧！</mat-hint>
+          <mat-error>請記得輸入自我介紹喔！</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+    <!-- <form [formGroup]="surveyForm"> -->
+      <button mat-button (click)="isLinear = !isLinear">切換Linear狀態</button>
+      <mat-vertical-stepper [linear]="isLinear">
+        <mat-step [stepControl]="basicFormGroup">
+        <form [formGroup]="basicFormGroup">
+          <ng-template matStepLabel>
+            <u>個人資訊</u>
+          </ng-template>
+          <h4>提供個人資訊</h4>
+          <mat-form-field>
+            <input name="name" type="text" id="name" placeholder="name" required
+            matInput formControlName="name">
+          </mat-form-field>
+          </form>
+          <button mat-button matStepperNext>前進到『詳細問題』</button>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            <em>詳細問題</em>
+          </ng-template>
+          <h4>主要的問題內容</h4>
+          <mat-form-field>
+            <input type="text" id="question" placeholder="question"
+            matInput>
+          </mat-form-field>
+          <button mat-button matStepperPrevious>回到『個人資訊』</button>
+          <button mat-button matStepperNext>前進到『其他』</button>
+        </mat-step>
+        <mat-step label="其他">
+          <h4>其他問題</h4>
+          <mat-form-field>
+            <input type="text" id="other" placeholder="other"
+            matInput>
+          </mat-form-field>
+          <button mat-button matStepperPrevious>回到『詳細問題』</button>
+        </mat-step>
+      </mat-vertical-stepper>
+    <!-- </form> -->
+    </div>
+
+<!--
+    <mat-horizontal-stepper>
+      <mat-step label="個人資訊">
+        <h4>提供個人資訊</h4>
+      </mat-step>
+      <mat-step label="詳細問題">
+        <h4>主要問題內容</h4>
+      </mat-step>
+      <mat-step label="其他">
+        <h4>其他問題</h4>
+      </mat-step>
+    </mat-horizontal-stepper>
+-->
+    <div>
+      <button mat-raised-button [matMenuTriggerFor]="positionMenu1">巢狀選單demo
+      </button>
+      <mat-menu #positionMenu1="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="subMenu1">訊息1</button>
+        <button mat-menu-item [matMenuTriggerFor]="subMenu2">訊息2</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>訊息3</button>
+      </mat-menu>
+
+      <mat-menu #subMenu1="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          訊息 1-1
+        </button>
+        <button mat-menu-item>
+          <mat-icon>favorite</mat-icon>
+          訊息 1-2
+        </button>
+        <button mat-menu-item>
+          <mat-icon>thumb_up</mat-icon>
+          訊息 1-3
+        </button>
+      </mat-menu>
+
+      <mat-menu #subMenu2="matMenu">
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          訊息 2-1
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>setting</mat-icon>
+          訊息 2-2
+        </button>
+      </mat-menu>
+    </div>
+
+
+    <div style="text-align:center">
+      <button mat-raised-button [matMenuTriggerFor]='positionMenu'>
+        開啟訊息設定、這是一條比較常的按鈕，好確認menu的生長方向
+      </button>
+      <mat-menu #positionMenu='matMenu' xPosition='after' [overlapTrigger]="false">
+        <button mat-menu-item>訊息1</button>
+        <button mat-menu-item>訊息2</button>
+        <button mat-menu-item>訊息3</button>
+        <button mat-menu-item>訊息4</button>
+        <button mat-menu-item>訊息5</button>
+        <button mat-menu-item>訊息6</button>
+        <button mat-menu-item>訊息7</button>
+      </mat-menu>
+    </div>
     <button mat-raised-button (click)="toggleSideNav(sideNav)">
       切換左邊選單狀態
     </button>
+
+    <button mat-raised-button (click)="menuTrigger.toggleMenu()">
+    開啟訊息設定
+    </button>
+
     <router-outlet></router-outlet>
+
+    <div>
+      <mat-nav-list>
+        <h3 matSubheader>
+          <mat-icon>chat_bubble</mat-icon>
+          新訊息
+        </h3>
+        <mat-list-item *ngIf="optNew.selected">這是新消息</mat-list-item>
+        <mat-list-item *ngIf="optAds.selected">這是廣告消息</mat-list-item>
+
+        <mat-divider></mat-divider>
+        <h3 matSubheader>
+          <mat-icon>setting</mat-icon>
+          訊息設定
+        </h3>
+        <mat-selection-list #list>
+          <mat-list-option [value]="1" #optNew (click)="onSelectChangeNews(optNew)">
+            有新訊息時通知我
+          </mat-list-option>
+          <mat-list-option [value]="2" #optAds (click)="onSelectChangeAds(optAds)">
+            顯示廣告訊息
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-nav-list>
+    </div>
+
+    <div>
+      <mat-list>
+        <h3 matSubheader>好友訊息</h3>
+        <mat-list-item>
+          <img matListAvatar src="assets/clover.jpg" />
+          <p matLine>Clover</p>
+          <p matLine>Hi. 好久不見，傷好了嗎？</p>
+          <!-- button 會自動被推到最後面 -->
+          <button mat-icon-button><mat-icon>chat</mat-icon></button>
+        </mat-list-item>
+        <mat-list-item>
+          <!-- 即使icon button 放在前面，還是會被往後推 -->
+          <button mat-icon-button><mat-icon>chat</mat-icon></button>
+          <img matListAvatar src="assets/angular.jpg" />
+          <p matLine>銀座</p>
+          <p matLine>找時間再去吧！</p>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
     <div>
       <mat-form-field>
@@ -78,174 +269,119 @@
     <a mat-button>Link</a>
 
     <button mat-raised-button>我是按鈕</button>
-<button mat-raised-button color="primary">Primary</button>
-<button mat-raised-button color="accent">Accent</button>
-<button mat-raised-button color="warng">Warn</button>
-<button mat-raised-button disabled>Disabled</button>
-<a mat-raised-button>Link</a>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button color="warng">Warn</button>
+    <button mat-raised-button disabled>Disabled</button>
+    <a mat-raised-button>Link</a>
 
-<button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon>我有ICON</button>
-<br >
-<br >
-<br >
-<div>
-<button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon></button>
-</div>
+    <button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon>我有ICON</button>
+    <br >
+    <br >
+    <br >
+    <div>
+    <button mat-raised-button color="primary"><mat-icon>thumb_up</mat-icon></button>
+    </div>
 
-<br >
-<br >
-<button mat-raised-button mat-icon-button color="primary"><mat-icon>thumb_up</mat-icon></button>
+    <br >
+    <br >
+    <button mat-raised-button mat-icon-button color="primary"><mat-icon>thumb_up</mat-icon></button>
 
-<br >
-<br >
-<button mat-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
+    <br >
+    <br >
+    <button mat-fab>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-fab color="primary">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-fab color="accent">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-fab color="warn">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-fab disabled>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
 
-<br >
-<br >
-<button mat-mini-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
+    <br >
+    <br >
+    <button mat-mini-fab>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-mini-fab disabled>
+      <mat-icon>thumb_up</mat-icon>
+    </button>
 
-<br >
-<br >
-<mat-button-toggle>我是個開關</mat-button-toggle>
+    <br >
+    <br >
+    <mat-button-toggle>我是個開關</mat-button-toggle>
 
-<div>
-  <mat-button-toggle-group #formatAlignGroup="matButtonToggleGroup">
-    <!-- button toggle 所代表的值 -->
-    <mat-button-toggle value="left">
-      <mat-icon>format_align_left</mat-icon>
-    </mat-button-toggle>
+    <div>
+      <mat-button-toggle-group #formatAlignGroup="matButtonToggleGroup">
+        <!-- button toggle 所代表的值 -->
+        <mat-button-toggle value="left">
+          <mat-icon>format_align_left</mat-icon>
+        </mat-button-toggle>
 
-    <!-- 預設被選取 -->
-    <mat-button-toggle value="center" checked="true">
-      <mat-icon>format_align_center</mat-icon>
-    </mat-button-toggle>
+        <!-- 預設被選取 -->
+        <mat-button-toggle value="center" checked="true">
+          <mat-icon>format_align_center</mat-icon>
+        </mat-button-toggle>
 
-    <mat-button-toggle value="right">
-      <mat-icon>format_align_right</mat-icon>
-    </mat-button-toggle>
+        <mat-button-toggle value="right">
+          <mat-icon>format_align_right</mat-icon>
+        </mat-button-toggle>
 
-    <!-- 不允許選擇的button toggle -->
-    <mat-button-toggle value="justify" disabled>
-      <mat-icon>format_align_justify</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <div>對齊方式為： {{formatAlignGroup.value}}</div>
+        <!-- 不允許選擇的button toggle -->
+        <mat-button-toggle value="justify" disabled>
+          <mat-icon>format_align_justify</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <div>對齊方式為： {{formatAlignGroup.value}}</div>
 
-  <!-- 加上multiple 則裡面的mat-button-toggle可以複選 -->
-  <!-- 加上vertical="true" 改變排列方式 -->
-  <mat-button-toggle-group multiple vertical="true">
-    <mat-button-toggle value="bold" #buttonToggleBold>
-      <mat-icon>format_bold</mat-icon>
-    </mat-button-toggle>
+      <!-- 加上multiple 則裡面的mat-button-toggle可以複選 -->
+      <!-- 加上vertical="true" 改變排列方式 -->
+      <mat-button-toggle-group multiple vertical="true">
+        <mat-button-toggle value="bold" #buttonToggleBold>
+          <mat-icon>format_bold</mat-icon>
+        </mat-button-toggle>
 
-    <mat-button-toggle value="italic" checked="true" #buttonToggleItalic>
-      <mat-icon>format_italic</mat-icon>
-    </mat-button-toggle>
+        <mat-button-toggle value="italic" checked="true" #buttonToggleItalic>
+          <mat-icon>format_italic</mat-icon>
+        </mat-button-toggle>
 
-    <mat-button-toggle value="underlined" checked="true" #buttonToggleUnderlined>
-      <mat-icon>format_underlined</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+        <mat-button-toggle value="underlined" checked="true" #buttonToggleUnderlined>
+          <mat-icon>format_underlined</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
 
-  <div>粗體： {{buttonToggleBold.checked}}、斜體： {{buttonToggleItalic.checked}}、底線： {{buttonToggleUnderlined.checked}}</div>
-</div>
+      <div>粗體： {{buttonToggleBold.checked}}、斜體： {{buttonToggleItalic.checked}}、底線： {{buttonToggleUnderlined.checked}}</div>
+    </div>
 
-<div class="demo-ripple-container" mat-ripple></div>
-<br >
-<br >
-<button mat-mini-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<br >
-<br >
-<button mat-mini-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<br >
-<br >
-<button mat-mini-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<br >
-<br >
-<button mat-mini-fab>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="primary">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="accent">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab color="warn">
-  <mat-icon>thumb_up</mat-icon>
-</button>
-<button mat-mini-fab disabled>
-  <mat-icon>thumb_up</mat-icon>
-</button>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <div class="demo-ripple-container" mat-ripple></div>
+
+  <mat-nav-list>
+    <h3 matSubheader>多行文字示範</h3>
+    <mat-list-item>
+      <p matLine>很好。</p>
+      <p matLine>差不多好了！</p>
+    </mat-list-item>
+    <mat-list-item>
+      <p matLine>Biotrump</p>
+      <p matLine>使用matLine讓清單</p>
+    </mat-list-item>
+  </mat-nav-list>
+
+
+</mat-sidenav-content>

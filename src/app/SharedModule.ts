@@ -9,7 +9,11 @@ import { MatButtonModule, MatCheckboxModule,
   MatFormFieldModule,
   MatDatepickerModule,
   MAT_DATE_LOCALE,
-  MAT_DATE_FORMATS } from '@angular/material';
+  MAT_DATE_FORMATS,
+  MatListModule,
+  MatMenuModule,
+  MatStepperModule,
+  MatExpansionModule } from '@angular/material';
 
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -36,7 +40,11 @@ export const TW_FORMATS = {
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatListModule,
+    MatMenuModule,
+    MatStepperModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -48,7 +56,11 @@ export const TW_FORMATS = {
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatListModule,
+    MatMenuModule,
+    MatStepperModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW'},

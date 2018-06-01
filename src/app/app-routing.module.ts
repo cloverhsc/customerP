@@ -1,3 +1,5 @@
+import { LobbyComponent } from './lobby/lobby.component';
+import { ServiceManagerComponent } from './service-manager/service-manager.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +13,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'service',
+    component: ServiceManagerComponent
+  },
+  {
+    path: 'lobby',
+    component: LobbyComponent
   },
   {
     path: '**',
