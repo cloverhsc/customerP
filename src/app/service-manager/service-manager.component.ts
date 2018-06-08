@@ -1,5 +1,13 @@
+import { Observable } from 'rxjs';
 import { ServiceMgService } from './../service-mg.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
+import {
+  FormGroup,
+  Validators, FormBuilder } from '@angular/forms';
+import { UserData } from './../user-data';
+import { BaseSettingOption } from './../service-setting-content';
+
+import { ServiceList } from './../service-data';
 
 
 @Component({
@@ -9,7 +17,12 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class ServiceManagerComponent implements OnInit {
 
+  isloading = true;
+
   private el: ElementRef;
+  newUserFile = new UserData();
+  serviceSetForm: FormBuilder;
+  settingFile: BaseSettingOption<any>[] = [];
 
   constructor(
     private element: ElementRef,
@@ -22,20 +35,21 @@ export class ServiceManagerComponent implements OnInit {
     this.servMg.getClover().subscribe(
       (obj) => console.log(obj)
     );
+    this.GetAllService();
   }
 
-  dashcam() {
-    this.CleanClickEffect();
-    let service = <HTMLElement>this.el.nativeElement.querySelector('#dashcam');
-    service.classList.add('clicked');
-    console.log(`click dashcam button`);
-  }
 
-  babycam() {
+  setService(servName: string) {
     this.CleanClickEffect();
-    let service = <HTMLElement>this.el.nativeElement.querySelector('#babycam');
+    let setting: Observable<BaseSettingOption<any>[]>;
+    const service = <HTMLElement>this.el.nativeElement.querySelector(`#${servName}`);
+    console.log(service);
     service.classList.add('clicked');
-    console.log(`click babycam button`);
+    console.log(`click ${servName} button`);
+    setting = this.servMg.getServiceSetting(servName);
+    setting.subscribe(
+      (resp) => this.settingFile = resp
+    );
   }
 
   /**
@@ -52,7 +66,14 @@ export class ServiceManagerComponent implements OnInit {
 
   getUserData() {
     this.servMg.getClover().subscribe(
-      (obj) => console.log(obj)
+      (obj) => this.newUserFile = obj[0]
     );
+  }
+
+  GetAllService() {
+    this.servMg.getServiceList().subscribe( (list) => {
+      this.newUserFile.serviceList = list ;
+      this.isloading = false;
+    });
   }
 }

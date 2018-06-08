@@ -1,3 +1,4 @@
+import { ServiceSettingPageComponent } from './service-setting-page/service-setting-page.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { ServiceManagerComponent } from './service-manager/service-manager.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'lobby',
     component: LobbyComponent
+  },
+  {
+    path: 'setting',
+    component: ServiceSettingPageComponent
   },
   {
     path: '**',

@@ -2,7 +2,7 @@ import { UserData } from './../user-data';
 import { ServiceMgService } from './../service-mg.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 
-import { ServiceList } from './../service-data';
+import { ServiceList, ServiceObj } from './../service-data';
 
 @Component({
   selector: 'app-lobby',
@@ -12,7 +12,7 @@ import { ServiceList } from './../service-data';
 export class LobbyComponent implements OnInit {
 
   isloading = true;
-  service_list: ServiceList;
+  service_list: ServiceObj[];
   option: string;
   private el: ElementRef;
   newUserFile: UserData;
@@ -26,6 +26,7 @@ export class LobbyComponent implements OnInit {
 
   ngOnInit() {
     this.GetAllService();
+    this.getClover();
   }
 
   GetAllService() {
@@ -43,7 +44,7 @@ export class LobbyComponent implements OnInit {
         tmpUserData = obj;
 
         services.forEach((srv) => {
-          const buyServ0 = this.service_list.list.find(h => h.name === srv);
+          const buyServ0 = this.service_list.find(h => h.name === srv);
           console.log(buyServ0);
           tmpUserData[0].serviceList.push(buyServ0);
           console.log(tmpUserData[0]);
@@ -64,7 +65,7 @@ export class LobbyComponent implements OnInit {
 
   setService(servName: string) {
     this.CleanClickEffect();
-    let service = <HTMLElement>this.el.nativeElement.querySelector(`#${servName}`);
+    const service = <HTMLElement>this.el.nativeElement.querySelector(`#${servName}`);
     console.log(service);
     service.classList.add('clicked');
     console.log(`click ${servName} button`);

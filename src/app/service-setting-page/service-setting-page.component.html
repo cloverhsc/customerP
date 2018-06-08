@@ -1,0 +1,68 @@
+<form [formGroup]="serviceSetForm" >
+
+  <div *ngFor="let opt of setFile" >
+
+    <div [ngSwitch]="opt.controlType">
+
+      <section *ngSwitchCase="'text'">
+        <mat-form-field>
+            <input  matInput type="text"
+            [id]="opt.key" [formControlName]="opt.key"
+            [placeholder]="opt.placeholder">
+        </mat-form-field>
+      </section>
+
+      <section *ngSwitchCase="'email'">
+        <mat-form-field>
+            <input  matInput type='email'
+            [id]="opt.key" [formControlName]="opt.key"
+            [placeholder]="opt.placeholder"
+            pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            >
+
+        </mat-form-field>
+      </section>
+
+      <section *ngSwitchCase="'checkbox'">
+        <div>{{opt.label}}</div>
+        <mat-checkbox [formControlName]="opt.key" [value]="opt.value"
+        [checked]="opt.checked">{{opt.name}}</mat-checkbox>
+      </section>
+
+
+
+      <section *ngSwitchCase="'slider'">
+        <div> {{opt.label}}</div>
+        <mat-slider [formControlName]="opt.key" [min]="opt.min"
+        [max]="opt.max" [step]="1" thumbLabel></mat-slider>
+      </section>
+
+      <section *ngSwitchCase="'dropdown'">
+        <div>{{opt.label}}</div>
+        <mat-select [formControlName]="opt.key">
+          <mat-option *ngFor="let item of opt.options" [value]="item.value">
+            {{item.title}}
+          </mat-option>
+        </mat-select>
+      </section>
+
+      <section *ngSwitchCase="'radio'">
+        <div>{{opt.label}}</div>
+        <mat-radio-group [formControlName]="opt.key">
+            <mat-radio-button
+            *ngFor="let item of opt.options"
+            [value]="item.value" [checked]="item.checked">
+              {{item.title}}
+            </mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </div>
+
+  </div>
+
+  <button mat-raised-button class="primary" type="submit">
+    Save
+  </button>
+  <!-- <p>Form: {{serviceSetForm.value | json}}</p>
+  <p>Form: {{serviceSetForm.status}}</p> -->
+</form>

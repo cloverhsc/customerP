@@ -18,6 +18,7 @@ import { SharedMaterialModule } from './SharedModule';
 import { HomeComponent } from './home/home.component';
 import { ServiceManagerComponent } from './service-manager/service-manager.component';
 import { LobbyComponent } from './lobby/lobby.component';
+import { ServiceSettingPageComponent } from './service-setting-page/service-setting-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LobbyComponent } from './lobby/lobby.component';
     LoginComponent,
     HomeComponent,
     ServiceManagerComponent,
-    LobbyComponent
+    LobbyComponent,
+    ServiceSettingPageComponent
   ],
   imports: [
     BrowserModule,
