@@ -16,21 +16,10 @@ export class OptionControlService {
     options.forEach( opt => {
 
       // Input options element:
-      if (
-        opt.controlType === 'text' || opt.controlType === 'email'
-      ) {
-        group[opt.key] = opt.required ? new FormControl(opt.value || '', Validators.required)
-          : new FormControl(opt.value || '');
-      } else if ( opt.controlType === 'checkbox') {
-        group[opt.key] = opt.required ? new FormControl(opt['checked'] || '', Validators.required)
-          : new FormControl(opt['checked'] || '');
-      } else if ( opt.controlType === 'slider' ) {
-        group[opt.key] = opt.required ? new FormControl(opt.value || '', Validators.required)
-          : new FormControl(opt.value || '');
-      } else if ( opt.controlType === 'dropdown') {
-        group[opt.key] = opt.required ? new FormControl(opt.value || '', Validators.required)
-          : new FormControl(opt.value || '');
-      } else if (opt.controlType === 'radio') {
+      if (opt.type === 'checkbox' || opt.type === 'slidetoggle') {
+        group[opt.key] = opt.required ? new FormControl(opt.value || false, Validators.required)
+          : new FormControl(opt.value || false);
+      } else {
         group[opt.key] = opt.required ? new FormControl(opt.value || '', Validators.required)
           : new FormControl(opt.value || '');
       }

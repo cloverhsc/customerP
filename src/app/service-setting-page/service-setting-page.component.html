@@ -1,15 +1,17 @@
-<form [formGroup]="serviceSetForm" >
+<form [formGroup]="serviceSetForm" (ngSubmit)="onSubmit()" class="container">
 
-  <div *ngFor="let opt of setFile" >
+  <div *ngFor="let opt of setFile" class="ngfor">
 
-    <div [ngSwitch]="opt.controlType">
+    <div [ngSwitch]="opt.type" class="switch">
 
-      <section *ngSwitchCase="'text'">
-        <mat-form-field>
-            <input  matInput type="text"
-            [id]="opt.key" [formControlName]="opt.key"
-            [placeholder]="opt.placeholder">
-        </mat-form-field>
+      <section *ngSwitchCase="'text'" class="case">
+        <div class="input">
+          <mat-form-field>
+              <input  matInput type="text"
+              [id]="opt.key" [formControlName]="opt.key"
+              [placeholder]="opt.placeholder">
+          </mat-form-field>
+        </div>
       </section>
 
       <section *ngSwitchCase="'email'">
@@ -31,13 +33,13 @@
 
 
 
-      <section *ngSwitchCase="'slider'">
+      <section *ngSwitchCase="'sliderbar'">
         <div> {{opt.label}}</div>
         <mat-slider [formControlName]="opt.key" [min]="opt.min"
         [max]="opt.max" [step]="1" thumbLabel></mat-slider>
       </section>
 
-      <section *ngSwitchCase="'dropdown'">
+      <section *ngSwitchCase="'select'">
         <div>{{opt.label}}</div>
         <mat-select [formControlName]="opt.key">
           <mat-option *ngFor="let item of opt.options" [value]="item.value">
@@ -56,6 +58,12 @@
             </mat-radio-button>
         </mat-radio-group>
       </section>
+
+      <section *ngSwitchCase="'slidetoggle'">
+        <mat-slide-toggle [formControlName]="opt.key" [checked]="opt.value">
+            {{opt.label}}
+        </mat-slide-toggle>
+      </section>
     </div>
 
   </div>
@@ -63,6 +71,6 @@
   <button mat-raised-button class="primary" type="submit">
     Save
   </button>
-  <!-- <p>Form: {{serviceSetForm.value | json}}</p>
-  <p>Form: {{serviceSetForm.status}}</p> -->
+  <p>Form: {{serviceSetForm.value | json}}</p>
+  <p>Form: {{serviceSetForm.status}}</p>
 </form>

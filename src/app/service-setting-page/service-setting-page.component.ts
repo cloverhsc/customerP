@@ -42,7 +42,13 @@ export class ServiceSettingPageComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
+    if (this.serviceSetForm.status.toLocaleLowerCase() === 'valid') {
+      // reactive form check valid.
+    } else {
+      // reactive failed.
+    }
     console.log(`Click save button`);
+    console.log(this.serviceSetForm.status);
   }
 
 }

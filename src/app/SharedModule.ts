@@ -17,7 +17,8 @@ import { MatButtonModule, MatCheckboxModule,
   MatProgressSpinnerModule,
   MatSliderModule,
   MatSelectModule,
-  MatRadioModule } from '@angular/material';
+  MatRadioModule,
+  MatSlideToggleModule } from '@angular/material';
 
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -52,7 +53,8 @@ export const TW_FORMATS = {
     MatProgressSpinnerModule,
     MatSliderModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatButtonModule,
@@ -72,7 +74,8 @@ export const TW_FORMATS = {
     MatProgressSpinnerModule,
     MatSliderModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW'},

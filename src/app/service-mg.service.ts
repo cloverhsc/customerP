@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import {
   InputOption, CheckboxOption, BaseSettingOption,
   RadioOption, DropOption, EmailOption,
-  SliderOption } from './service-setting-content';
+  SliderBar, SlideToggle } from './service-setting-content';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,24 +28,23 @@ export class ServiceMgService {
   tmpUserData: UserData;
 
   public strucJson = {
-    title: 'dashcam',
+    service_name: 'dashcam',
     domain: {
-      name: 'domain', required: true,
+      required: true,
       placeholder: 'domain name', label: 'DOMAIN',
-      controlType: 'text', key: 'domain', value: '',
-      type: 'text'
+      key: 'domain', value: 'biotrump.com', type: 'text'
     },
     name: {
-      name: 'name', required: false, placeholder: 'name', label: 'NAME',
-      controlType: 'text', key: 'name', value: '', type: 'text'
+      required: false, placeholder: 'name', label: 'NAME',
+      key: 'name', value: '', type: 'text'
     },
     email: {
-      name: 'email', required: true, placeholder: 'email', label: 'EMAIL',
-      controlType: 'email', key: 'email', value: '', type: 'email'
+      required: true, placeholder: 'email', label: 'EMAIL',
+      key: 'email', value: 'test@mail.com', type: 'email'
     },
     country: {
-      name: 'country', required: true, type: 'select',
-      controlType: 'dropdown', key: 'country', label: 'COUNTRY',
+      required: true, type: 'select',
+      key: 'country', label: 'COUNTRY',
       value: 'taiwan',
       options: [
         { title: 'Japan', value: 'japan'},
@@ -56,8 +55,8 @@ export class ServiceMgService {
       ]
     },
     loading: {
-      name: 'loading', required: true, type: 'select',
-      controlType: 'dropdown', key: 'loading', label: 'LOADING',
+      required: true, type: 'select',
+      key: 'loading', label: 'LOADING',
       value: '10',
       options: [
         { title: '10', value: '10' },
@@ -68,16 +67,17 @@ export class ServiceMgService {
       ]
     },
     autobackup: {
-      name: 'auto backup', value: 'yes', checked: true,
+      value: true,
       key: 'autobackup', label: 'AUTO BACKUP', type: 'checkbox',
-      controlType: 'checkbox'
+      required: false
     },
     checkbox1: {
-      name: 'checkbox1', value: 'yes', checked: false,
-      key: 'checkbox1', label: 'CHECKBOX 1', type: 'checkbox'
+      value: false,
+      key: 'checkbox1', label: 'CHECKBOX 1', type: 'checkbox',
+      required: true
     },
     radio1: {
-      name: 'radio 1', controlType: 'radio', type: 'radio',
+      type: 'radio',
       key: 'radio1', label: 'RADIO1', value: 'opt2',
       options: [
         { title: 'R1-opt1', value: 'opt1' },
@@ -86,7 +86,7 @@ export class ServiceMgService {
       ]
     },
     radio2: {
-      name: 'radio 2', controlType: 'radio', type: 'radio',
+      type: 'radio',
       key: 'radio2', label: 'RADIO2', value: 'opt2',
       options: [
         { title: 'R2-opt1', value: 'opt1' },
@@ -95,14 +95,22 @@ export class ServiceMgService {
       ]
     },
     slider1: {
-      name: 'slider 1', controlType: 'slider', type: 'slider',
-      key: 'slider1', label: 'SLIDER1', min: '1', max: '100',
-      value: '30'
+      type: 'sliderbar',
+      key: 'slider1', label: 'SLIDER1', min: 1, max: 100,
+      value: 0
     },
     slider2: {
-      name: 'slider 2', controlType: 'slider', type: 'slider',
-      key: 'slider2', label: 'SLIDER2', min: '1', max: '5000',
-      value: '4000'
+      type: 'sliderbar',
+      key: 'slider2', label: 'SLIDER2', min: 1, max: 5000,
+      value: 4000
+    },
+    slider3: {
+      type: 'slidetoggle',
+      key: 'slider3', label: 'SLIDER3', value: false
+    },
+    slider4: {
+      type: 'slidetoggle',
+      key: 'slider4', label: 'SLIDER4', value: true
     }
   };
 
@@ -111,16 +119,15 @@ export class ServiceMgService {
     phonenumber: {
       name: 'phonenumber', required: true,
       placeholder: '電話號碼', label: 'phonenumber',
-      controlType: 'text', key: 'phonenumber', value: '',
-      type: 'text'
+      key: 'phonenumber', value: '', type: 'text'
     },
     name: {
       name: 'name', required: false, placeholder: '姓名', label: 'NAME',
-      controlType: 'text', key: 'name', value: '', type: 'text'
+      key: 'name', value: '', type: 'text'
     },
     dinner: {
       name: 'dinner', required: true, type: 'select',
-      controlType: 'dropdown', key: 'country', label: '晚餐',
+      key: 'country', label: '晚餐',
       value: '',
       options: [
         { title: '牛排', value: 'beefstack' },
@@ -132,8 +139,7 @@ export class ServiceMgService {
     },
     price: {
       name: 'price', required: true, type: 'select',
-      controlType: 'dropdown', key: 'price', label: '價錢',
-      value: '',
+      key: 'price', label: '價錢', value: '',
       options: [
         { title: '100 NT', value: '100' },
         { title: '150 NT', value: '150' },
@@ -143,8 +149,8 @@ export class ServiceMgService {
       ]
     },
     location: {
-      name: 'location', required: true, type: 'select',
-      controlType: 'dropdown', key: 'location', label: '地區',
+      required: true, type: 'select',
+      key: 'location', label: '地區',
       value: '3',
       options: [
         { title: '永和', value: '1' },
@@ -158,19 +164,19 @@ export class ServiceMgService {
       ]
     },
     beer: {
-      name: 'beer', value: 'yes', checked: false,
+      name: 'beer', value: false,
       key: 'beer', label: '啤酒', type: 'checkbox'
     },
     tea: {
-      name: 'tea', value: 'yes', checked: false,
+      name: 'tea', value: false,
       key: 'tea', label: '茶', type: 'checkbox'
     },
     soda: {
-      name: 'soda', value: 'yes', checked: false,
+      name: 'soda', value: false,
       key: 'soda', label: '汽水', type: 'checkbox'
     },
     transfer: {
-      name: 'transfer', controlType: 'radio', type: 'radio',
+      name: 'transfer', type: 'radio',
       key: 'transfer', label: '交通工具', value: 'scooter',
       options: [
         { title: '捷運', value: 'mrt' },
@@ -246,8 +252,12 @@ export class ServiceMgService {
             regularSetting.push(new RadioOption(value));
           break;
 
-          case 'slider':
-            regularSetting.push(new SliderOption(value));
+          case 'sliderbar':
+            regularSetting.push(new SliderBar(value));
+          break;
+
+          case 'slidetoggle':
+            regularSetting.push(new SlideToggle(value));
           break;
         }
       }
