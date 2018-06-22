@@ -32,20 +32,24 @@ export class ServiceMgService {
     domain: {
       required: true,
       placeholder: 'domain name', label: 'DOMAIN',
-      key: 'domain', value: 'biotrump.com', type: 'text'
+      key: 'domain', value: 'biotrump.com', type: 'text',
+      order: 5
     },
     name: {
       required: false, placeholder: 'name', label: 'NAME',
-      key: 'name', value: '', type: 'text'
+      key: 'name', value: '', type: 'text',
+      order: 4
     },
     email: {
       required: true, placeholder: 'email', label: 'EMAIL',
-      key: 'email', value: 'test@mail.com', type: 'email'
+      key: 'email', value: 'test@mail.com', type: 'email',
+      order: 1
     },
     country: {
       required: true, type: 'select',
       key: 'country', label: 'COUNTRY',
       value: 'taiwan',
+      order: 2,
       options: [
         { title: 'Japan', value: 'japan'},
         { title: 'American', value: 'American' },
@@ -58,6 +62,7 @@ export class ServiceMgService {
       required: true, type: 'select',
       key: 'loading', label: 'LOADING',
       value: '10',
+      order: 3,
       options: [
         { title: '10', value: '10' },
         { title: '50', value: '50' },
@@ -69,25 +74,32 @@ export class ServiceMgService {
     autobackup: {
       value: true,
       key: 'autobackup', label: 'AUTO BACKUP', type: 'checkbox',
-      required: false
+      required: false,
+      order: 6
     },
     checkbox1: {
       value: false,
       key: 'checkbox1', label: 'CHECKBOX 1', type: 'checkbox',
-      required: true
+      required: true,
+      order: 9
     },
     radio1: {
       type: 'radio',
       key: 'radio1', label: 'RADIO1', value: 'opt2',
+      order: 8,
       options: [
         { title: 'R1-opt1', value: 'opt1' },
         { title: 'R1-opt2', value: 'opt2' },
-        { title: 'R1-opt3', value: 'opt3' }
+        { title: 'R1-opt3', value: 'opt3' },
+        { title: 'R1-opt4', value: 'opt4' },
+        { title: 'R1-opt5', value: 'opt5' },
+        { title: 'R1-opt6', value: 'opt6' }
       ]
     },
     radio2: {
       type: 'radio',
       key: 'radio2', label: 'RADIO2', value: 'opt2',
+      order: 7,
       options: [
         { title: 'R2-opt1', value: 'opt1' },
         { title: 'R2-opt2', value: 'opt2' },
@@ -97,20 +109,24 @@ export class ServiceMgService {
     slider1: {
       type: 'sliderbar',
       key: 'slider1', label: 'SLIDER1', min: 1, max: 100,
-      value: 0
+      value: 0,
+      order: 13
     },
     slider2: {
       type: 'sliderbar',
       key: 'slider2', label: 'SLIDER2', min: 1, max: 5000,
-      value: 4000
+      value: 4000,
+      order: 12
     },
     slider3: {
       type: 'slidetoggle',
-      key: 'slider3', label: 'SLIDER3', value: false
+      key: 'slider3', label: 'SLIDER3', value: false,
+      order: 11
     },
     slider4: {
       type: 'slidetoggle',
-      key: 'slider4', label: 'SLIDER4', value: true
+      key: 'slider4', label: 'SLIDER4', value: true,
+      order: 10
     }
   };
 
@@ -119,16 +135,17 @@ export class ServiceMgService {
     phonenumber: {
       name: 'phonenumber', required: true,
       placeholder: '電話號碼', label: 'phonenumber',
-      key: 'phonenumber', value: '', type: 'text'
+      key: 'phonenumber', value: '', type: 'text', order: 2
     },
     name: {
       name: 'name', required: false, placeholder: '姓名', label: 'NAME',
-      key: 'name', value: '', type: 'text'
+      key: 'name', value: '', type: 'text', order: 4
     },
     dinner: {
       name: 'dinner', required: true, type: 'select',
       key: 'country', label: '晚餐',
       value: '',
+      order: 1,
       options: [
         { title: '牛排', value: 'beefstack' },
         { title: '雞肉飯', value: 'chickenrice' },
@@ -140,6 +157,7 @@ export class ServiceMgService {
     price: {
       name: 'price', required: true, type: 'select',
       key: 'price', label: '價錢', value: '',
+      order: 5,
       options: [
         { title: '100 NT', value: '100' },
         { title: '150 NT', value: '150' },
@@ -152,6 +170,7 @@ export class ServiceMgService {
       required: true, type: 'select',
       key: 'location', label: '地區',
       value: '3',
+      order: 3,
       options: [
         { title: '永和', value: '1' },
         { title: '中和', value: '2' },
@@ -165,19 +184,23 @@ export class ServiceMgService {
     },
     beer: {
       name: 'beer', value: false,
-      key: 'beer', label: '啤酒', type: 'checkbox'
+      key: 'beer', label: '啤酒', type: 'checkbox',
+      order: 9
     },
     tea: {
       name: 'tea', value: false,
-      key: 'tea', label: '茶', type: 'checkbox'
+      key: 'tea', label: '茶', type: 'checkbox',
+      order: 7
     },
     soda: {
       name: 'soda', value: false,
-      key: 'soda', label: '汽水', type: 'checkbox'
+      key: 'soda', label: '汽水', type: 'checkbox',
+      order: 6
     },
     transfer: {
       name: 'transfer', type: 'radio',
       key: 'transfer', label: '交通工具', value: 'scooter',
+      order: 8,
       options: [
         { title: '捷運', value: 'mrt' },
         { title: '機車', value: 'scooter' },
@@ -262,9 +285,11 @@ export class ServiceMgService {
         }
       }
     });
-    return regularSetting;
+    // return regularSetting;
+    return regularSetting.sort( (a, b) => a.order - b.order );
   }
-  /**
+
+/**
  * Handle Http operation that failed.
  * Let the app continue.
  * @param operation - name of the operation that failed

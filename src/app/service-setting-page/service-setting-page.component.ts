@@ -14,6 +14,7 @@ import { OptionControlService } from './../option-control.service';
 export class ServiceSettingPageComponent implements OnInit, OnChanges {
 
   @Input() setFile: BaseSettingOption<any>[];
+  @Input() renderJson: any;
 
   serviceSetForm: FormGroup;
 

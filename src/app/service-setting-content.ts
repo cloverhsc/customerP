@@ -4,18 +4,21 @@ export class BaseSettingOption<T> {
   label: string;
   required: boolean;
   type: string;
+  order: number;
   constructor(options: {
     value?: T | any,
     key?: string,
     label?: string,
     required?: boolean,
-    type?: string
+    type?: string,
+    order?: number
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';
     this.label = options.label || '';
     this.required = !!options.required;
     this.type = options.type || '';
+    this.order = options.order || 1;
   }
 }
 
